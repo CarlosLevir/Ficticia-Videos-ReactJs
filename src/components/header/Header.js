@@ -32,7 +32,8 @@ const styles = {
         justifyContent: "space-around",
     },
     iconsOfMenu: {
-        fontWeight: "bold",
+        color: "#a8385c",
+        marginRight: 5,
     }
 }
 
@@ -82,11 +83,11 @@ class Header extends Component {
                             onClose={this.handleClose}
                         >
                         <MenuItem onClick={this.handleClose}>
-                            <StarBorder />
+                            <StarBorder style={styles.iconsOfMenu} />
                             Destaques
                         </MenuItem>
                         <MenuItem onClick={this.handleClose}>
-                            <PlayCircleOutline />
+                            <PlayCircleOutline style={styles.iconsOfMenu} />
                             Vídeos
                         </MenuItem>
                         </Menu>

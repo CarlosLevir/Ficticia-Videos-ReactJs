@@ -5,10 +5,19 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+const styles = {
+    DescriptionCard: {
+        width: "560px",
+        maxWidth: "80%",
+        height: "315px",
+        marginTop: "1%",
+    }
+}
+
 class DescriptionVideoCard extends Component {
     render() {
         return (
-            <Card>
+            <Card style={styles.DescriptionCard}>
                 <CardContent>
                     <Typography color="textSecondary" gutterBottom>
                         Description Video

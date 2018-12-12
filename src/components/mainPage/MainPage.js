@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import DescriptionVideoCard from '../descriptionVideoCard/DescriptionVideoCard';
-import getChannelVideos from '../../services/userChannelVideos/UserChannelVideos';
+import SpotlightVideoCard from '../spotlightVideoCard/SpotlightVideoCard';
+import PlusVideosCard from '../plusVideosCard/PlusVideosCard';
 
 const styles = {
     spotlightVideoDiv: {
         display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
     },
-    spotlightVideoTitle: {
-        color: "#a8385c",
-        fontFamily: "Titillium Web",
-        fontWeight: "normal",
+    leftCard: {
+        // width: "60%",
     },
-    spotlightVideo: {
-        maxWidth: "80%",
+    rightCard: {
+        // width: "60%",
     },
 }
 
@@ -20,20 +21,14 @@ class MainPage extends Component {
     render() {
         return (
             <div>
-                <div style={styles.spotlightVideoDi}>
-                    <h2 style={styles.spotlightVideoTitle}>Vídeo em distaque</h2>
-                    <iframe
-                        style={styles.spotlightVideo}
-                        width="560"
-                        height="315"
-                        src="https://www.youtube.com/embed/IxGhaVdRUQc"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen>
-                    </iframe>
+                <div style={styles.leftCard}>
+                    <SpotlightVideoCard />
+                    <div style={styles.spotlightVideoDiv}>
+                        <DescriptionVideoCard/>
+                    </div>
                 </div>
-                <div>
-                    <DescriptionVideoCard/>
+                <div style={styles.rightCard}>
+                    <PlusVideosCard />
                 </div>
             </div>
         );

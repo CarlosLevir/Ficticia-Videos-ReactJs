@@ -10,6 +10,7 @@ import StarBorder from '@material-ui/icons/StarBorder';
 import PlayCircleOutline from '@material-ui/icons/PlayCircleOutline';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import MainPage from '../mainPage/MainPage';
 
 const theme = createMuiTheme({
     palette: {
@@ -55,7 +56,7 @@ class Header extends Component {
         const { anchorEl } = this.state;
         return (
             <MuiThemeProvider theme={theme}>
-                <AppBar position="fixed">
+                <AppBar position="static">
                     <Toolbar style={styles.headerToolbar}>
                         <div>
                             <Typography variant="h6" style={styles.siteName}>
@@ -93,6 +94,7 @@ class Header extends Component {
                         </Menu>
                     </Toolbar>
                 </AppBar>
+                <MainPage />
             </MuiThemeProvider>
         );
     }

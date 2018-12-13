@@ -2,33 +2,67 @@ import React, { Component } from 'react';
 import DescriptionVideoCard from '../descriptionVideoCard/DescriptionVideoCard';
 import SpotlightVideoCard from '../spotlightVideoCard/SpotlightVideoCard';
 import PlusVideosCard from '../plusVideosCard/PlusVideosCard';
+import * as YoutubeService from '../../services/youtubeServices/YoutubeServices';
 
 const styles = {
+    mainDiv: {
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+    },
     spotlightVideoDiv: {
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "center",
     },
     leftCard: {
-        // width: "60%",
+        width: "50%",
+        minWidth: 345,
     },
     rightCard: {
-        // width: "60%",
+        width: "40%",
+        minWidth: 345,
     },
 }
 
 class MainPage extends Component {
+    constructor(props){
+        super(props);
+
+        this.state = {
+            spotlightVideoUrl: null,
+            relatedVideos: [],
+        }
+    }
+
+    componentDidMount = () => {
+        YoutubeService.getUnsubscribedTrailer().then((response) => {
+            this.setState({
+                spotlightVideoUrl: response.data.items[0].brandingSettings.channel.unsubscribedTrailer,
+            },
+            () => YoutubeService.getRelatedVideos(this.state.spotlightVideoUrl).then((response) => {
+                this.setState({
+                    relatedVideos: response.data.items,
+                })
+            }))
+        })
+    }
+
     render() {
         return (
-            <div>
+            <div style={styles.mainDiv}>
                 <div style={styles.leftCard}>
-                    <SpotlightVideoCard />
+                    <SpotlightVideoCard
+                        spotlightUrl={this.state.spotlightVideoUrl}
+                    />
                     <div style={styles.spotlightVideoDiv}>
                         <DescriptionVideoCard/>
                     </div>
                 </div>
                 <div style={styles.rightCard}>
-                    <PlusVideosCard />
+                    <PlusVideosCard
+                    arrayVideosRelated={this.state.relatedVideos}
+                    />
                 </div>
             </div>
         );

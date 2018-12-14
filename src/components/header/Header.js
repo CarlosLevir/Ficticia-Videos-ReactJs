@@ -11,6 +11,7 @@ import PlayCircleOutline from '@material-ui/icons/PlayCircleOutline';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MainPage from '../mainPage/MainPage';
+import ChannelVideos from '../channelVideos/ChannelVideos';
 
 const theme = createMuiTheme({
     palette: {
@@ -42,6 +43,7 @@ class Header extends Component {
 
     state = {
         anchorEl: null,
+        value: 1,
       };
     
       handleClick = event => {
@@ -51,6 +53,12 @@ class Header extends Component {
       handleClose = () => {
         this.setState({ anchorEl: null });
       };
+
+      handlePage = (e) => {
+          this.setState({
+              value: e.target.value
+          }, this.handleClose())
+      }
 
     render() {
         const { anchorEl } = this.state;
@@ -83,18 +91,19 @@ class Header extends Component {
                             open={Boolean(anchorEl)}
                             onClose={this.handleClose}
                         >
-                        <MenuItem onClick={this.handleClose}>
+                        <MenuItem onClick={this.handleClose} value={1} onClick={this.handlePage}>
                             <StarBorder style={styles.iconsOfMenu} />
                             Destaques
                         </MenuItem>
-                        <MenuItem onClick={this.handleClose}>
+                        <MenuItem onClick={this.handleClose} value={2} onClick={this.handlePage}>
                             <PlayCircleOutline style={styles.iconsOfMenu} />
                             Vídeos
                         </MenuItem>
                         </Menu>
                     </Toolbar>
                 </AppBar>
-                <MainPage />
+                {this.state.value === 1 && <MainPage />}
+                {this.state.value === 1 && <ChannelVideos />}
             </MuiThemeProvider>
         );
     }

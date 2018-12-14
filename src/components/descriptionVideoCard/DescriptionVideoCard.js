@@ -7,9 +7,9 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
     DescriptionCard: {
-        width: "560px",
+        width: 560,
         maxWidth: "80%",
-        height: "315px",
+        height: 100,
         marginTop: "1%",
     }
 }

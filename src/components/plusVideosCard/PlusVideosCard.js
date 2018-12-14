@@ -9,6 +9,18 @@ const styles = {
         color: "#a8385c",
         fontFamily: "Titillium Web",
         fontWeight: "normal",
+    },
+    videoInfo: {
+        display: "flex",
+        alignItems: "center",
+        marginBottom: "15px",
+    },
+    thumbRelated: {
+        width: 170,
+        height: 95,
+    },
+    relatedVideoTitle: {
+        maxWidth: "40%",
     }
 }
 
@@ -16,27 +28,26 @@ class PlusVideosCard extends Component {
     render() {
         var relatedVideos = this.props.arrayVideosRelated.map((video, key) => {
             return (
-                <Card className="card-items" key={key}>
-                    <CardContent>
-                        <CardMedia
-                            image={video.snippet.thumbnails.medium.url}
-                        />
-                        <Typography component="p" color="textSecondary">
-                            {video.snippet.title}
-                        </Typography>
-                        <Typography
-                            component="p"
-                            size="small">
-                            {/* views */}
-                        </Typography>
-                    </CardContent>
-                </Card>
+                <div style={styles.videoInfo} key={key}>
+                    <CardMedia
+                        style={styles.thumbRelated}
+                        image={video.snippet.thumbnails.medium.url}
+                    />
+                    <Typography style={styles.relatedVideoTitle} component="p" color="textSecondary">
+                        {video.snippet.title}
+                    </Typography>
+                </div>
             );
             
         })
         return (
-            <div className="div-cards-repos">
-                {relatedVideos}
+            <div>
+                <h2 style={styles.plusVideosTitle}>+ Vídeos</h2>
+                <Card>
+                    <CardContent>
+                        {relatedVideos}
+                    </CardContent>
+                </Card>
             </div>
         );
     }

@@ -15,9 +15,10 @@ class SpotlightVideoCard extends Component {
     render() {
         return (
             <div>
-                <h2 style={styles.spotlightVideoTitle}>Vídeo em distaque</h2>
+                <h2 style={styles.spotlightVideoTitle}>Vídeo em destaque</h2>
                 <div style={styles.spotlightVideoDiv}>
                     <iframe
+                        title="Main Video"
                         style={styles.spotlightVideo}
                         width="560"
                         height="315"

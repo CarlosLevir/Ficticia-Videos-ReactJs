@@ -20,7 +20,7 @@ const styles = {
         minWidth: 345,
     },
     rightCard: {
-        width: "40%",
+        width: "20%",
         minWidth: 345,
     },
 }
@@ -31,6 +31,7 @@ class MainPage extends Component {
 
         this.state = {
             spotlightVideoUrl: null,
+            videoDescription: null,
             relatedVideos: [],
         }
     }
@@ -56,7 +57,7 @@ class MainPage extends Component {
                         spotlightUrl={this.state.spotlightVideoUrl}
                     />
                     <div style={styles.spotlightVideoDiv}>
-                        <DescriptionVideoCard/>
+                        <DescriptionVideoCard />
                     </div>
                 </div>
                 <div style={styles.rightCard}>

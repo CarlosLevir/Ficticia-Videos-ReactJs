@@ -10,7 +10,7 @@ const styles = {
         flexWrap: "wrap",
         justifyContent: "center",
     },
-    spotlightVideoDiv: {
+    descriptionDiv: {
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "center",
@@ -54,9 +54,9 @@ class MainPage extends Component {
             <div style={styles.mainDiv}>
                 <div style={styles.leftCard}>
                     <SpotlightVideoCard
-                        spotlightUrl={this.state.spotlightVideoUrl}
+                    spotlightUrl={this.state.spotlightVideoUrl}
                     />
-                    <div style={styles.spotlightVideoDiv}>
+                    <div style={styles.descriptionDiv}>
                         <DescriptionVideoCard />
                     </div>
                 </div>

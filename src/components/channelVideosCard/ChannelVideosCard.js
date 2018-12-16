@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
+import ModalCard from '../modalCard/ModalCard';
 
 const styles = {
     plusVideosTitle: {
@@ -11,11 +11,18 @@ const styles = {
         fontWeight: "normal",
     },
     mainDiv: {
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
     },
     videoInfo: {
         display: "flex",
+        flexWrap: "wrap",
         alignItems: "center",
         marginBottom: "15px",
+        width: "400px",
+        minWidth: "30%",
+        marginLeft: "3%"
     },
     thumbRelated: {
         width: 170,
@@ -27,16 +34,36 @@ const styles = {
 }
 
 class PlusVideosCard extends Component {
+
+    state = {
+        modal: 0,
+        chosenVideo: null,
+    }
+
+    showModal = (e) => {
+        this.setState({
+            modal: 1,
+            chosenVideo: e.target.dataset.value,
+        })
+    }
+
+    hideModal = () => {
+        this.setState({
+            modal: 0,
+        })
+    }
+
     render() {
         var relatedVideos = this.props.videos.map((video, key) => {
             return (
-                <div style={styles.videoInfo} key={key}>
+                <div style={styles.videoInfo} key={key} id={key} data-value={video.id.videoId} onClick={this.showModal}>
                     <CardMedia
-                        style={styles.thumbRelated}
-                        image={video.snippet.thumbnails.medium.url}
+                    data-value={video.id.videoId} 
+                    style={styles.thumbRelated}
+                    image={video.snippet.thumbnails.medium.url}
                     />
                     <Typography style={styles.relatedVideoTitle} component="p" color="textSecondary">
-                        {video.snippet.title}
+                    {video.snippet.title}
                     </Typography>
                 </div>
             );
@@ -48,6 +75,10 @@ class PlusVideosCard extends Component {
                 <Card style={styles.mainDiv}>
                     {relatedVideos}
                 </Card>
+                {this.state.modal === 1 && <ModalCard
+                video={this.state.chosenVideo}
+                hideModal={this.hideModal}
+                />}
             </div>
         );
     }

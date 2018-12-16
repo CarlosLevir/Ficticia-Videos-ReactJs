@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import DescriptionVideoCard from '../descriptionVideoCard/DescriptionVideoCard';
+import * as YoutubeService from '../../services/youtubeServices/YoutubeServices';
 
 function getModalStyle() {
   return {
@@ -26,6 +27,7 @@ const styles = theme => ({
 class ModalCard extends Component {
   state = {
     open: true,
+    videoDescription: null
   };
 
   handleOpen = () => {
@@ -41,7 +43,15 @@ class ModalCard extends Component {
     () => {
         this.props.hideModal();
     }
-    )}
+  )}
+
+  componentDidMount = () => {
+    YoutubeService.getFullDescriptionVideo(this.props.video).then((response) => {
+      this.setState({
+        videoDescription: response.data.items[0].snippet.description,
+      })
+    })
+  }
 
   render() {
     const { classes } = this.props;
@@ -64,7 +74,9 @@ class ModalCard extends Component {
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen>
             </iframe>
-            <DescriptionVideoCard />
+            <DescriptionVideoCard
+            videoDescription={this.state.videoDescription}
+            />
           </div>
         </Modal>
       </div>

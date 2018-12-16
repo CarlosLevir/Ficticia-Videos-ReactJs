@@ -43,7 +43,7 @@ class Header extends Component {
 
     state = {
         anchorEl: null,
-        value: 2,
+        value: 1,
       };
     
       handleClick = event => {

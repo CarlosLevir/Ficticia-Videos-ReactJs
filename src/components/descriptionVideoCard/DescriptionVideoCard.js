@@ -7,20 +7,26 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
     DescriptionCard: {
-        width: 560,
-        maxWidth: "80%",
+        width: "100%",
         height: 100,
         marginTop: "1%",
     }
 }
 
 class DescriptionVideoCard extends Component {
+
+    state = {
+        videoDescription: null,
+        views: null,
+        date: null,
+    }
+
     render() {
         return (
             <Card style={styles.DescriptionCard}>
                 <CardContent>
                     <Typography color="textSecondary" gutterBottom>
-                        Description Video
+                        {this.props.videoDescription}
                     </Typography>
                 </CardContent>
                 <CardActions>

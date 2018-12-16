@@ -11,9 +11,8 @@ const styles = {
         justifyContent: "center",
     },
     descriptionDiv: {
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "center",
+        width: "80%",
+        marginLeft: "10%"
     },
     leftCard: {
         width: "50%",
@@ -33,6 +32,7 @@ class MainPage extends Component {
             spotlightVideoUrl: null,
             videoDescription: null,
             relatedVideos: [],
+            videoDescription: null
         }
     }
 
@@ -45,8 +45,29 @@ class MainPage extends Component {
                 this.setState({
                     relatedVideos: response.data.items,
                 })
+                YoutubeService.getFullDescriptionVideo(this.state.spotlightVideoUrl).then((response) => {
+                    this.setState({
+                        videoDescription: response.data.items[0].snippet.description,
+                    })
+                })
             }))
         })
+    }
+
+    changeVideo = (newVideo) => {
+        this.setState({
+            spotlightVideoUrl: newVideo,
+        },
+        () => YoutubeService.getRelatedVideos(this.state.spotlightVideoUrl).then((response) => {
+            this.setState({
+                relatedVideos: response.data.items,
+            })
+            YoutubeService.getFullDescriptionVideo(this.state.spotlightVideoUrl).then((response) => {
+                this.setState({
+                    videoDescription: response.data.items[0].snippet.description,
+                })
+            })
+        }))
     }
 
     render() {
@@ -57,11 +78,14 @@ class MainPage extends Component {
                     spotlightUrl={this.state.spotlightVideoUrl}
                     />
                     <div style={styles.descriptionDiv}>
-                        <DescriptionVideoCard />
+                        <DescriptionVideoCard
+                        videoDescription={this.state.videoDescription}
+                        />
                     </div>
                 </div>
                 <div style={styles.rightCard}>
                     <PlusVideosCard
+                    changeVideo={this.changeVideo}
                     arrayVideosRelated={this.state.relatedVideos}
                     />
                 </div>

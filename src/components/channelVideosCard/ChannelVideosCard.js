@@ -62,7 +62,7 @@ class PlusVideosCard extends Component {
                     style={styles.thumbRelated}
                     image={video.snippet.thumbnails.medium.url}
                     />
-                    <Typography style={styles.relatedVideoTitle} component="p" color="textSecondary">
+                    <Typography style={styles.relatedVideoTitle} data-value={video.id.videoId} component="p" color="textSecondary">
                     {video.snippet.title}
                     </Typography>
                 </div>

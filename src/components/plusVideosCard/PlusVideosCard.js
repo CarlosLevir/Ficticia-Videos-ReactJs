@@ -25,15 +25,21 @@ const styles = {
 }
 
 class PlusVideosCard extends Component {
+
+    handleClick = (e) => {
+        this.props.changeVideo(e.target.dataset.value);
+    }
+
     render() {
         var relatedVideos = this.props.arrayVideosRelated.map((video, key) => {
             return (
-                <div style={styles.videoInfo} key={key}>
+                <div style={styles.videoInfo} key={key} data-value={video.id.videoId} onClick={this.handleClick}>
                     <CardMedia
-                        style={styles.thumbRelated}
-                        image={video.snippet.thumbnails.medium.url}
+                    data-value={video.id.videoId}
+                    style={styles.thumbRelated}
+                    image={video.snippet.thumbnails.medium.url}
                     />
-                    <Typography style={styles.relatedVideoTitle} component="p" color="textSecondary">
+                    <Typography style={styles.relatedVideoTitle} data-value={video.id.videoId} component="p" color="textSecondary">
                         {video.snippet.title}
                     </Typography>
                 </div>

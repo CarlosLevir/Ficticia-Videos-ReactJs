@@ -11,8 +11,11 @@ const styles = {
         justifyContent: "center",
     },
     descriptionDiv: {
-        width: "80%",
-        marginLeft: "10%"
+        maxWidth: 560,
+    },
+    outDescriptionDiv: {
+        display: "flex",
+        justifyContent: "center"
     },
     leftCard: {
         width: "50%",
@@ -32,7 +35,7 @@ class MainPage extends Component {
             spotlightVideoUrl: null,
             videoDescription: null,
             relatedVideos: [],
-            videoDescription: null
+            videoTitle: null
         }
     }
 
@@ -48,6 +51,7 @@ class MainPage extends Component {
                 YoutubeService.getFullDescriptionVideo(this.state.spotlightVideoUrl).then((response) => {
                     this.setState({
                         videoDescription: response.data.items[0].snippet.description,
+                        videoTitle: response.data.items[0].snippet.title,
                     })
                 })
             }))
@@ -77,10 +81,13 @@ class MainPage extends Component {
                     <SpotlightVideoCard
                     spotlightUrl={this.state.spotlightVideoUrl}
                     />
-                    <div style={styles.descriptionDiv}>
-                        <DescriptionVideoCard
-                        videoDescription={this.state.videoDescription}
-                        />
+                    <div style={styles.outDescriptionDiv}>
+                        <div style={styles.descriptionDiv}>
+                            <DescriptionVideoCard
+                            videoTitle={this.state.videoTitle}
+                            videoDescription={this.state.videoDescription}
+                            />
+                        </div>
                     </div>
                 </div>
                 <div style={styles.rightCard}>

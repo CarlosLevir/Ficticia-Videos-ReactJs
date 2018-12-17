@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ChannelVideosCard from '../channelVideosCard/ChannelVideosCard';
 import * as YoutubeService from '../../services/youtubeServices/YoutubeServices';
 
-class ChannelVideos extends Component {
+class SearchPage extends Component {
     constructor(props){
         super(props);
 
@@ -12,7 +12,7 @@ class ChannelVideos extends Component {
     }
 
     componentDidMount = () => {
-        YoutubeService.getChannelVideos().then((response) => {
+        YoutubeService.getSearchedVideos(this.props.keyword).then((response) => {
             this.setState({
                 videos: response.data.items,
             })
@@ -23,7 +23,7 @@ class ChannelVideos extends Component {
         return (
             <div>
                 <ChannelVideosCard
-                titlePage="Todos os vídeos do Canal"
+                titlePage={'Resultados para: "' + this.props.keyword + '"'}
                 videos={this.state.videos}
                 />
             </div>
@@ -31,4 +31,4 @@ class ChannelVideos extends Component {
     }
 }
 
-export default ChannelVideos;
+export default SearchPage;

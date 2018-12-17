@@ -14,6 +14,7 @@ const styles = {
         display: "flex",
         alignItems: "center",
         marginBottom: "15px",
+        cursor: "pointer",
     },
     thumbRelated: {
         width: 170,
@@ -21,6 +22,9 @@ const styles = {
     },
     relatedVideoTitle: {
         maxWidth: "40%",
+        color: "#a8395c",
+        fontFamily: "Titillium Web",
+        fontWeight: "bold",
     }
 }
 

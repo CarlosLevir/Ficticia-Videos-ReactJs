@@ -22,7 +22,8 @@ const styles = {
         marginBottom: "15px",
         width: "400px",
         minWidth: "30%",
-        marginLeft: "3%"
+        marginLeft: "3%",
+        cursor: "pointer",
     },
     thumbRelated: {
         width: 170,
@@ -30,6 +31,9 @@ const styles = {
     },
     relatedVideoTitle: {
         maxWidth: "40%",
+        color: "#a8395c",
+        fontFamily: "Titillium Web",
+        fontWeight: "bold",
     }
 }
 
@@ -71,7 +75,7 @@ class PlusVideosCard extends Component {
         })
         return (
             <div>
-                <h2 style={styles.plusVideosTitle}>Todos os vídeos do Canal</h2>
+                <h2 style={styles.plusVideosTitle}>{this.props.titlePage}</h2>
                 <Card style={styles.mainDiv}>
                     {relatedVideos}
                 </Card>

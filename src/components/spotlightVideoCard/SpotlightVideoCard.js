@@ -7,7 +7,7 @@ const styles = {
         fontWeight: "normal",
     },
     spotlightVideo: {
-        maxWidth: "80%",
+        maxWidth: "100%",
     }
 }
 

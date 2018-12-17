@@ -12,6 +12,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MainPage from '../mainPage/MainPage';
 import ChannelVideosPage from '../channelVideosPage/ChannelVideosPage';
+import SearchPage from '../searchPage/SearchPage';
 
 const theme = createMuiTheme({
     palette: {
@@ -36,6 +37,15 @@ const styles = {
     iconsOfMenu: {
         color: "#a8385c",
         marginRight: 5,
+    },
+    searchInput: {
+        width: "200px",
+        backgroundColor: "#922d4d",
+        borderRadius: "5px",
+        border:"1px solid white",
+        padding: "10px",
+        color: "white",
+        outline: "none",
     }
 }
 
@@ -44,6 +54,7 @@ class Header extends Component {
     state = {
         anchorEl: null,
         value: 1,
+        keyword: null
       };
     
       handleClick = event => {
@@ -60,6 +71,14 @@ class Header extends Component {
           }, this.handleClose())
       }
 
+      handleSearch = (e) => {
+        e.preventDefault();
+        this.setState({
+            keyword: e.target.keyword.value,
+            value: 3
+        });
+      };
+
     render() {
         const { anchorEl } = this.state;
         return (
@@ -72,6 +91,13 @@ class Header extends Component {
                             </Typography>
                         </div>
                         <div style={styles.rightMenu}>
+                            <form onSubmit={this.handleSearch}>
+                                <input
+                                name="keyword"
+                                placeholder="Buscar"
+                                style={styles.searchInput}
+                                />
+                            </form>
                             <IconButton color="inherit">
                                 <SearchIcon />
                             </IconButton>
@@ -104,6 +130,7 @@ class Header extends Component {
                 </AppBar>
                 {this.state.value === 1 && <MainPage />}
                 {this.state.value === 2 && <ChannelVideosPage />}
+                {this.state.value === 3 && <SearchPage keyword={this.state.keyword} />}
             </MuiThemeProvider>
         );
     }

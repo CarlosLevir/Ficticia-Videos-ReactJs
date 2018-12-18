@@ -25,6 +25,7 @@ class SearchPage extends Component {
                 <ChannelVideosCard
                 titlePage={'Resultados para: "' + this.props.keyword + '"'}
                 videos={this.state.videos}
+                showButton={"none"}
                 />
             </div>
         );

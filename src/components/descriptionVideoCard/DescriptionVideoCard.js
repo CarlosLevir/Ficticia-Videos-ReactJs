@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 const styles = {
     DescriptionCard: {
         width: "100%",
-        height: 100,
+        height: 155,
         marginTop: "1%",
     },
     videoTitle: {

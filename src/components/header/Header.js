@@ -13,6 +13,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MainPage from '../mainPage/MainPage';
 import ChannelVideosPage from '../channelVideosPage/ChannelVideosPage';
 import SearchPage from '../searchPage/SearchPage';
+import logo from '../../imgs/logo.png';
+import * as YoutubeService from '../../services/youtubeServices/YoutubeServices';
 
 const theme = createMuiTheme({
     palette: {
@@ -39,13 +41,29 @@ const styles = {
         marginRight: 5,
     },
     searchInput: {
-        width: "200px",
+        maxWidth: "80%",
         backgroundColor: "#922d4d",
         borderRadius: "5px",
         border:"1px solid white",
         padding: "10px",
         color: "white",
         outline: "none",
+    },
+    formSearch: {
+        maxWidth: "30%",
+    },
+    rightMenu: {
+        display: "flex",
+        alignItems: "center",
+        maxWidth: "50%",
+    },
+    logo: {
+        width: 45,
+        height: 30
+    },
+    logoInfo: {
+        display: "flex",
+        alignItems: "center"
     }
 }
 
@@ -54,7 +72,8 @@ class Header extends Component {
     state = {
         anchorEl: null,
         value: 1,
-        keyword: null
+        keyword: null,
+        videosDataSearch: null
       };
     
       handleClick = event => {
@@ -67,15 +86,22 @@ class Header extends Component {
 
       handlePage = (e) => {
           this.setState({
-              value: e.target.value
+              value: e.target.id
           }, this.handleClose())
       }
 
       handleSearch = (e) => {
         e.preventDefault();
         this.setState({
-            keyword: e.target.keyword.value,
-            value: 3
+            keyword: e.target.keyword.value
+        },
+        () => {
+            YoutubeService.getSearchedVideos(this.state.keyword).then((response) => {
+                this.setState({
+                    videosDataSearch: response.data.items,
+                    value: 3,
+                })
+            })
         });
       };
 
@@ -85,13 +111,14 @@ class Header extends Component {
             <MuiThemeProvider theme={theme}>
                 <AppBar position="static">
                     <Toolbar style={styles.headerToolbar}>
-                        <div>
+                        <div style={styles.logoInfo}>
+                            <img src={logo} alt="Logo" style={styles.logo} />
                             <Typography variant="h6" style={styles.siteName}>
                                 Fictícia videos
                             </Typography>
                         </div>
                         <div style={styles.rightMenu}>
-                            <form onSubmit={this.handleSearch}>
+                            <form style={styles.formSearch} onSubmit={this.handleSearch}>
                                 <input
                                 name="keyword"
                                 placeholder="Buscar"
@@ -117,20 +144,20 @@ class Header extends Component {
                             open={Boolean(anchorEl)}
                             onClose={this.handleClose}
                         >
-                        <MenuItem value={1} onClick={this.handlePage}>
-                            <StarBorder style={styles.iconsOfMenu} />
+                        <MenuItem id={1} onClick={this.handlePage}>
+                            <StarBorder id={1} style={styles.iconsOfMenu} />
                             Destaques
                         </MenuItem>
-                        <MenuItem value={2} onClick={this.handlePage}>
-                            <PlayCircleOutline style={styles.iconsOfMenu} />
+                        <MenuItem id={2} onClick={this.handlePage}>
+                            <PlayCircleOutline id={2} style={styles.iconsOfMenu} />
                             Vídeos
                         </MenuItem>
                         </Menu>
                     </Toolbar>
                 </AppBar>
-                {this.state.value === 1 && <MainPage />}
-                {this.state.value === 2 && <ChannelVideosPage />}
-                {this.state.value === 3 && <SearchPage keyword={this.state.keyword} />}
+                {this.state.value == 1 && <MainPage />}
+                {this.state.value == 2 && <ChannelVideosPage />}
+                {this.state.value == 3 && <SearchPage keyword={this.state.keyword} videosDataSearch={this.state.videosDataSearch} />}
             </MuiThemeProvider>
         );
     }

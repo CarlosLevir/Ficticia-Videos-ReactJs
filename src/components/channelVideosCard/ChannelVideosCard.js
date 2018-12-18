@@ -34,6 +34,16 @@ const styles = {
         color: "#a8395c",
         fontFamily: "Titillium Web",
         fontWeight: "bold",
+    },
+    loadMoreButton: {
+        color: "#797979",
+        backgroundColor: "white",
+        borderRadius: "5px",
+        width: "30%",
+        height: "25px",
+    },
+    buttonDiv: {
+        width: "100%",
     }
 }
 
@@ -58,7 +68,7 @@ class PlusVideosCard extends Component {
     }
 
     render() {
-        var relatedVideos = this.props.videos.map((video, key) => {
+        var channelVideos = this.props.videos.map((video, key) => {
             return (
                 <div style={styles.videoInfo} key={key} id={key} data-value={video.id.videoId} onClick={this.showModal}>
                     <CardMedia
@@ -77,7 +87,12 @@ class PlusVideosCard extends Component {
             <div>
                 <h2 style={styles.plusVideosTitle}>{this.props.titlePage}</h2>
                 <Card style={styles.mainDiv}>
-                    {relatedVideos}
+                    {channelVideos}
+                    <div style={styles.buttonDiv}>
+                        <button size="small" color="primary" style={styles.loadMoreButton} onClick={this.props.loadMoreVideos}>
+                            CARREGAR MAIS VÍDEOS
+                        </button>
+                    </div>
                 </Card>
                 {this.state.modal === 1 && <ModalCard
                 video={this.state.chosenVideo}

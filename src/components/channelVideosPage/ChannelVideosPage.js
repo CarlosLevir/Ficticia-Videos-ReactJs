@@ -18,6 +18,14 @@ class ChannelVideos extends Component {
             })
         })
     }
+
+    loadMoreVideos = () => {
+        YoutubeService.getChannelVideos(24).then((response) => {
+            this.setState({
+                videos: response.data.items,
+            })
+        })
+    }
     
     render() {
         return (
@@ -25,6 +33,8 @@ class ChannelVideos extends Component {
                 <ChannelVideosCard
                 titlePage="Todos os vídeos do Canal"
                 videos={this.state.videos}
+                loadMoreVideos={this.loadMoreVideos}
+                showButton={"block"}
                 />
             </div>
         );

@@ -86,7 +86,7 @@ class Header extends Component {
 
       handlePage = (e) => {
           this.setState({
-              value: e.target.id
+              value: e.target.value
           }, this.handleClose())
       }
 
@@ -144,20 +144,20 @@ class Header extends Component {
                             open={Boolean(anchorEl)}
                             onClose={this.handleClose}
                         >
-                        <MenuItem id={1} onClick={this.handlePage}>
-                            <StarBorder id={1} style={styles.iconsOfMenu} />
+                        <MenuItem value={1} onClick={this.handlePage}>
+                            <StarBorder style={styles.iconsOfMenu} />
                             Destaques
                         </MenuItem>
-                        <MenuItem id={2} onClick={this.handlePage}>
-                            <PlayCircleOutline id={2} style={styles.iconsOfMenu} />
+                        <MenuItem value={2} onClick={this.handlePage}>
+                            <PlayCircleOutline style={styles.iconsOfMenu} />
                             Vídeos
                         </MenuItem>
                         </Menu>
                     </Toolbar>
                 </AppBar>
-                {this.state.value == 1 && <MainPage />}
-                {this.state.value == 2 && <ChannelVideosPage />}
-                {this.state.value == 3 && <SearchPage keyword={this.state.keyword} videosDataSearch={this.state.videosDataSearch} />}
+                {this.state.value === 1 && <MainPage />}
+                {this.state.value === 2 && <ChannelVideosPage />}
+                {this.state.value === 3 && <SearchPage keyword={this.state.keyword} videosDataSearch={this.state.videosDataSearch} />}
             </MuiThemeProvider>
         );
     }

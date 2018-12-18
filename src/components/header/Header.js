@@ -50,7 +50,7 @@ const styles = {
         outline: "none",
     },
     formSearch: {
-        maxWidth: "30%",
+        maxWidth: "25%",
     },
     rightMenu: {
         display: "flex",

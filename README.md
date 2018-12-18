@@ -12,7 +12,7 @@ https://github.com/CarlosLevir/ficticia-videos.git
 
 ## Usage
 
-Access [github-searcher.esy.es](http://github-searcher.esy.es) and search for some user.
+Access [ficticia-videos.esy.es](http://ficticia-videos.esy.es) and search for some user.
 
 ## Contributin
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
